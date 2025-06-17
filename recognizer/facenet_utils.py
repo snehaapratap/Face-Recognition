@@ -2,10 +2,18 @@ from keras.models import load_model
 import numpy as np
 import cv2
 
+# recognizer/facenet_utils.py
+from keras_facenet import FaceNet
+import numpy as np
+
 class FaceNetRecognizer:
-    def __init__(self, model_path='models/facenet_keras.h5'):
-        self.model = load_model(model_path)
-        self.embeddings = {}
+    def __init__(self):
+        self.embedder = FaceNet()
+    
+    def get_embedding(self, face_img):
+        # face_img must be RGB and shaped (160, 160, 3)
+        return self.embedder.embeddings([face_img])[0]
+
     
     def preprocess(self, face):
         face = cv2.resize(face, (160, 160))
