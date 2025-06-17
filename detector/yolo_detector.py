@@ -2,7 +2,7 @@ from ultralytics import YOLO
 import cv2
 
 class YOLODetector:
-    def __init__(self, model_path='models/yolov8n-face.pt'):
+    def __init__(self, model_path='models/yolov8n-face-lindevs.pt'):
         self.model = YOLO(model_path)
 
     def detect_faces(self, image):
