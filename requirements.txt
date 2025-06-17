@@ -1,0 +1,6 @@
+ultralytics
+tensorflow
+keras
+opencv-python
+mtcnn
+numpy
