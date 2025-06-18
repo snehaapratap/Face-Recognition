@@ -41,57 +41,22 @@ class FaceNetRecognizer:
                     self.known_names.append(person)
         print(f"[INFO] Loaded {len(self.known_names)} known face images.")
 
-    # def recognize(self, img):
-    #     results = []
-    #     faces = self.detector.detect_faces(img)
-    #     for face_data in faces:
-    #         box = face_data['box']
-    #         face = self.preprocess_face(img, box)
-    #         embedding = self.embedder.embeddings([face])[0]
-
-    #         name = "Unknown"
-    #         min_dist = 100
-    #         for known_embedding, known_name in zip(self.known_embeddings, self.known_names):
-    #             dist = np.linalg.norm(known_embedding - embedding)
-    #             if dist < 0.9 and dist < min_dist:
-    #                 name = known_name
-    #                 min_dist = dist
-
-    #         results.append((box, name))
-    #     return results
-    def recognize_faces(self, image):
-
-    # Detect faces using YOLOv8
-        results = self.detector(image)
-
-        for result in results:
-            boxes = result.boxes.xyxy.cpu().numpy().astype(int)
-
-        for box in boxes:
-            x1, y1, x2, y2 = box
-            face = image[y1:y2, x1:x2]
-
-            if face.size == 0:
-                continue
-
-            # Resize face and get embedding
-            face = Image.fromarray(face).resize((160, 160))
-            embedding = self.embedder.embeddings(np.array([face]))[0]
+    def recognize(self, img):
+        results = []
+        faces = self.detector.detect_faces(img)
+        for face_data in faces:
+            box = face_data['box']
+            face = self.preprocess_face(img, box)
+            embedding = self.embedder.embeddings([face])[0]
 
             name = "Unknown"
-            min_dist = float("inf")
-
-            # Compare to known faces
-            for person, emb in self.known_faces.items():
-                dist = np.linalg.norm(embedding - emb)
-                if dist < min_dist and dist < 10:  # Adjust threshold if needed
+            min_dist = 100
+            for known_embedding, known_name in zip(self.known_embeddings, self.known_names):
+                dist = np.linalg.norm(known_embedding - embedding)
+                if dist < 0.9 and dist < min_dist:
+                    name = known_name
                     min_dist = dist
-                    name = person
 
-            # Draw bounding box and label
-            cv2.rectangle(image, (x1, y1), (x2, y2), (0, 255, 0), 2)
-            cv2.putText(image, name, (x1, y1 - 10),
-                        cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 255, 0), 2)
-
-    return image
-
+            results.append((box, name))
+        return results
+  

@@ -1,26 +1,33 @@
 import streamlit as st
+import cv2
 import numpy as np
 from PIL import Image
 from recognizer.facenet_utils import FaceNetRecognizer
 
-# ✅ Set page config FIRST
-st.set_page_config(page_title="Face Recognition", layout="centered")
 
-# App Title
-st.title("Face Recognition using FaceNet")
+@st.cache_resource
+def load_recognizer():
+    recognizer = FaceNetRecognizer()
+    recognizer.load_known_faces('data/known_faces')
+    return recognizer
 
-# File uploader
-uploaded_file = st.file_uploader("Upload an image", type=["jpg", "jpeg", "png"])
+recognizer = load_recognizer()
 
-# Initialize recognizer
-recognizer = FaceNetRecognizer()
-recognizer.load_known_faces("data/known_faces")
+st.title("🔍 Face Recognition App with FaceNet")
 
-if uploaded_file is not None:
-    image = Image.open(uploaded_file).convert("RGB")
-    st.image(image, caption="Uploaded Image", use_column_width=True)
 
-    # Run recognition
-    result_image = recognizer.recognize_faces(np.array(image))
+uploaded_file = st.file_uploader("Upload an image for face recognition", type=["jpg", "jpeg", "png"])
 
-    st.image(result_image, caption="Recognition Result", use_column_width=True)
+if uploaded_file:
+    image = Image.open(uploaded_file).convert('RGB')
+    img = np.array(image)
+    img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
+
+    results = recognizer.recognize(img)
+    for box, name in results:
+        x, y, w, h = box
+        cv2.rectangle(img, (x, y), (x + w, y + h), (0, 255, 0), 2)
+        cv2.putText(img, name, (x, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 255, 0), 2)
+
+    img_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+    st.image(img_rgb, caption="Result", use_column_width=True)
