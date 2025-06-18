@@ -24,7 +24,7 @@ A powerful and user-friendly face recognition system that combines the accuracy 
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/yourusername/Face-Recognition.git
+   git clone https://github.com/snehaapratap/Face-Recognition.git
    cd Face-Recognition
    ```
 
@@ -84,13 +84,4 @@ python main.py
 
 Contributions are welcome! Please feel free to submit a Pull Request.
 
-## 📄 License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
----
-
-<div align="center">
-Made with ❤️ by [Your Name]
-</div>
 
