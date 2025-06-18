@@ -70,6 +70,9 @@ Face-Recognition/
 python main.py
 ```
 
+<img width="1454" alt="Screenshot 2025-06-18 at 14 31 23" src="https://github.com/user-attachments/assets/cf13a490-1792-4dc0-a152-d8adbcdc4209" />
+
+
 ## 📝 Requirements
 
 - Python 3.8+
@@ -79,6 +82,8 @@ python main.py
 - Streamlit
 - MTCNN
 - Ultralytics YOLO
+
+
 
 ## 🤝 Contributing
 
