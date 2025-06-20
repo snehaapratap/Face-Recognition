@@ -24,7 +24,7 @@ A powerful and user-friendly face recognition system that combines the accuracy 
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/yourusername/Face-Recognition.git
+   git clone https://github.com/snehaapratap/Face-Recognition.git
    cd Face-Recognition
    ```
 
@@ -70,6 +70,9 @@ Face-Recognition/
 python main.py
 ```
 
+<img width="1454" alt="Screenshot 2025-06-18 at 14 31 23" src="https://github.com/user-attachments/assets/cf13a490-1792-4dc0-a152-d8adbcdc4209" />
+
+
 ## 📝 Requirements
 
 - Python 3.8+
@@ -80,17 +83,10 @@ python main.py
 - MTCNN
 - Ultralytics YOLO
 
+
+
 ## 🤝 Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
 
-## 📄 License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
----
-
-<div align="center">
-Made with ❤️ by [Your Name]
-</div>
 
