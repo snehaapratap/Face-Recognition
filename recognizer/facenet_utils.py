@@ -25,10 +25,10 @@ class FaceNetRecognizer:
         for person in os.listdir(folder_path):
             person_folder = os.path.join(folder_path, person)
             if not os.path.isdir(person_folder):
-                continue  # Skip .DS_Store or non-folder files
+                continue  
             for img_name in os.listdir(person_folder):
                 if img_name.startswith('.'):
-                    continue  # Skip hidden files
+                    continue  
                 img_path = os.path.join(person_folder, img_name)
                 img = cv2.imread(img_path)
                 if img is None:
