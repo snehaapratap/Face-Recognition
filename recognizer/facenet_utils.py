@@ -103,4 +103,3 @@ class FaceNetRecognizer:
 
             results.append((box, name))
         return results
-recognizer.save_embeddings_to_json("face_embeddings_backup.json")
