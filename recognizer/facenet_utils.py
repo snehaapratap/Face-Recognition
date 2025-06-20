@@ -6,6 +6,7 @@ from mtcnn import MTCNN
 import uuid
 import chromadb
 from chromadb.config import Settings
+import json
 
 class FaceNetRecognizer:
     def __init__(self):
@@ -58,6 +59,7 @@ class FaceNetRecognizer:
                         ids=[face_id]
                     )
         print(f"[INFO] Loaded {len(self.known_names)} known face images.")
+        
 
     def restore_from_chromadb(self):
         print("[INFO] Restoring embeddings from ChromaDB...")
@@ -70,6 +72,18 @@ class FaceNetRecognizer:
             self.known_names.append(metadata["name"])
             self.known_ids.append(face_id)
         print(f"[INFO] Restored {len(self.known_names)} embeddings from ChromaDB.")
+    
+    def save_embeddings_to_json(self, json_path):
+        data = []
+        for embedding, name, face_id in zip(self.known_embeddings, self.known_names, self.known_ids):
+            data.append({
+                "id": face_id,
+                "name": name,
+                "embedding": embedding.tolist()
+            })
+        with open(json_path, "w") as f:
+            json.dump(data, f)
+        print(f"[INFO] Saved {len(data)} embeddings to {json_path}")
 
     def recognize(self, img):
         results = []
@@ -89,4 +103,4 @@ class FaceNetRecognizer:
 
             results.append((box, name))
         return results
-  
+recognizer.save_embeddings_to_json("face_embeddings_backup.json")

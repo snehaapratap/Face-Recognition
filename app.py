@@ -9,6 +9,8 @@ from recognizer.facenet_utils import FaceNetRecognizer
 def load_recognizer():
     recognizer = FaceNetRecognizer()
     recognizer.load_known_faces('data/known_faces')
+    # Save embeddings to JSON after loading known faces
+    recognizer.save_embeddings_to_json("face_embeddings_backup.json")
     return recognizer
 
 recognizer = load_recognizer()
