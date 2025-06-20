@@ -5,3 +5,4 @@ opencv-python
 mtcnn
 numpy
 streamlit
+chromadb

@@ -5,7 +5,7 @@ def make_collage(
     folder_path='data/test_images',
     collage_path='data/group_photos/collage.jpg',
     rows=2,
-    cols=4,  
+    cols=3,  
     image_size=(160, 160)
 ):
     os.makedirs(os.path.dirname(collage_path), exist_ok=True)
