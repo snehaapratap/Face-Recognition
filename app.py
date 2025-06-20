@@ -27,7 +27,7 @@ if uploaded_file:
     for box, name in results:
         x, y, w, h = box
         cv2.rectangle(img, (x, y), (x + w, y + h), (0, 255, 0), 2)
-        cv2.putText(img, name, (x, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 255, 0), 2)
+        cv2.putText(img, name, (x, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
 
     img_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
     st.image(img_rgb, caption="Result", use_column_width=True)
